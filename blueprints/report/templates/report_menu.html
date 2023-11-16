@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Меню отчётов</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div>
+        {% if context == -1 %}
+            <h2>Доступных отчётов нет</h2>
+        {% else %}
+            <h2>Доступные отчёты</h2>
+            {% for report in context %}
+                <a href="{{url_for('.report', proc=report['procedure_name'])}}">{{report['href_name']}}</a><br>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="bott">
+         <a href="{{url_for('main_menu')}}">Вернуться в главное меню</a>
+    </div>
+</body>
+</html>

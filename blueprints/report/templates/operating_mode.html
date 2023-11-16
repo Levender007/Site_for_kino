@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Работа с отчётом</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div>
+        <h2>{{title}}</h2>
+        <a class="button" href="{{url_for('.create_report', proc=proc)}}">Создать отчёт</a>
+        <a class="button" href="{{url_for('.see_report', proc=proc)}}">Посмотреть отчёт</a>
+    </div>
+    <div class="bott">
+        <p><a href="{{url_for('main_menu')}}">Вернуться в главное меню</a> &nbsp <a href="{{url_for('.report_menu')}}">Вернуться к выбору отчёта</a></p>
+    </div>
+</body>
+</html>

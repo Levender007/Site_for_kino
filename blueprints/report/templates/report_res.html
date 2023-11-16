@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Работа с отчётом</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div>
+        {% if context[1] == -1 %}
+            <h2>{{context[0]}} на {{date}} ещё не создан</h2>
+        {% else %}
+            <h2>{{context[0]}} на {{date}}</h2>
+            <table border="1">
+                <tr class="tab_title">
+                    {% for title in context[1][0] %}
+                        <td>{{title}}</td>
+                    {% endfor %}
+                </tr>
+                {% for row in context[1][1::] %}
+                    <tr>
+                        {% for title in row %}
+                            <td>{{title}}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+    <div class="bott">
+        <p><a href="{{url_for('main_menu')}}">Вернуться в главное меню</a> &nbsp <a href="{{url_for('.report_menu')}}">Вернуться к выбору отчёта</a></p>
+    </div>
+</body>
+</html>
