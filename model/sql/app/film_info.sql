@@ -1,0 +1,1 @@
+select Title, CountryCreator, ReleaseDate, Director, FilmStudio, Duration, PosterURL from films where ID = $title

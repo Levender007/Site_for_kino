@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запрос</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
+    <a href="{{url_for('.menu')}}"><img class="back" src="https://cdn-icons-png.flaticon.com/512/5908/5908333.png" width="3%" alt="B"></a>
+    <div>
+        {% if not context['result'] %}
+            <h2>Ошибка получения данных</h2>
+        {% elif context['result'] == -1 %}
+            <h2>Данных нет</h2>
+        {% else %}
+            <h2>Информация по доходам за {{context['year']}}-{{context['month']}}</h2>
+            <table border="1">
+                <tr class="tab_title">
+                    <td>День</td>
+                    <td>Доход</td>
+                </tr>
+                {% for day in context['result'] %}
+                <tr>
+                    <td>{{day['Day']}}</td>
+                    <td>{{day['Revenu']}} р.</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        <br><br><a class="button" href="{{url_for('.query', func='month_by_day_revenu')}}">Новый запрос</a>
+    </div>
+</body>
+</html>

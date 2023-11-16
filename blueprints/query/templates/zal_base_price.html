@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запрос</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
+    <a href="{{url_for('.menu')}}"><img class="back" src="https://cdn-icons-png.flaticon.com/512/5908/5908333.png" width="3%" alt="B"></a>
+    <div>
+        {% if not context %}
+            <h2>Ошибка получения данных</h2>
+        {% elif context == -1 %}
+            <h2>Данных нет</h2>
+        {% else %}
+            <h2>Базовая стоимость всех мест в залах</h2>
+            <ul>
+                {% for x in context %}
+                  <li>"{{x['Name']}}" – Базовая стоимость: {{x['Base']}} р.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

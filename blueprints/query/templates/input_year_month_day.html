@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запрос</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
+    <a href="{{url_for('.menu')}}"><img class="back" src="https://cdn-icons-png.flaticon.com/512/5908/5908333.png" width="3%" alt="B"></a>
+    <div>
+        <h2>Введите дату</h2>
+        <form action="" method=post>
+            <label for="year">Год</label>
+            <select name="year" id="year">
+                {% for i in range(2020, 2025) %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+            <label for="month">Месяц</label>
+            <select name="month" id="month">
+                <option value="01">Январь</option>
+                <option value="02">Февраль</option>
+                <option value="03">Март</option>
+                <option value="04">Апрель</option>
+                <option value="05">Май</option>
+                <option value="06">Июнь</option>
+                <option value="07">Июль</option>
+                <option value="08">Август</option>
+                <option value="09">Сентябрь</option>
+                <option value="10">Октябрь</option>
+                <option value="11">Ноябрь</option>
+                <option value="12">Декабрь</option>
+            </select>
+            <label for="day">День</label>
+            <select name="day" id="day">
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+                <option value="09">9</option>
+                {% for i in range(10, 31) %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+            <br><br><input type="submit" value="Отправить" class="button">
+        </form>
+    </div>
+</body>
+</html>

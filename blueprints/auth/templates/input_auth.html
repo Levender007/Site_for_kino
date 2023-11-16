@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>input_param</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div>
+    <h2>Введите логин и пароль</h2>
+    <form action="" method=post>
+        <label for="login" class="text-label">Логин</label>
+        <input type="text" name="Login" id="login"><br>
+        <label for="password" class="text-label">Пароль</label>
+        <input type="text" name="Pass" id="password"><br><br>
+        <input type="submit" value="Отправить" class="button">
+        <input type="reset" value="Очистить" class="button" style="background: white; color: black"><br>
+    </form>
+</div>
+{% if context %}
+    <div style="text-align:center; border-style:solid; border-color:red; margin:5px">
+        {% if context == 1 %}
+            <p style="color: red">Такого пользователя не существует</p>
+        {% elif context == 2 %}
+            <p style="color: red">Неверный пароль</p>
+        {% endif %}
+    </div>
+{% endif %}
+<div class="bott">
+    <a href="{{url_for('main_menu')}}">Вернуться в главное меню</a>
+</div>
+</body>
+</html>

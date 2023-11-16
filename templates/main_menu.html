@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главное меню</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div>
+        <h2>Главное меню</h2>
+        {% if ui %}
+            <a>Профиль</a><br>
+        {% else %}
+            <a href="{{url_for('bp_auth.auth_index')}}">Авторизоваться</a><br>
+        {% endif %}
+        <a href="{{url_for('home_page')}}">Домашняя страница</a><br>
+        {% if 'menu' in access %}
+            <a href="{{url_for('bp_query.menu')}}">Работа с запросами</a><br>
+        {% endif %}
+        {% if ui %}
+            <br><a href="{{url_for('bp_auth.logoff')}}">Выход</a>
+        {% endif %}
+    </div>
+</body>
+</html>

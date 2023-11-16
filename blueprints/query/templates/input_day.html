@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запрос</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
+    <a href="{{url_for('.menu')}}"><img class="back" src="https://cdn-icons-png.flaticon.com/512/5908/5908333.png" width="3%" alt="B"></a>
+    <div>
+        <h2>Введите количество дней</h2>
+        <form action="" method=post>
+            <input type="number" name="days" id="days" min="1" step="1">
+            <input type="submit" value="Отправить" class="button">
+        </form>
+    </div>
+</body>
+</html>

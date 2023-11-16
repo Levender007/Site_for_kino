@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{context['Title']}}</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div>
+    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
+    <a href="{{url_for('home_page')}}"><img class="back" src="https://cdn-icons-png.flaticon.com/512/5908/5908333.png" width="3%" alt="B"></a>
+    <h2>{{context['Title']}}</h2>
+    <div class="img_desc">
+        <div>
+            <img src="{{context['PosterURL']}}" width="95%">
+        </div>
+        <div style="text-align: left">
+            <p>Страна создатель: {{context['Director']}}</p>
+            <p>Год выхода: {{context['ReleaseDate']}}</p>
+            <p>Режисёр: {{context['Director']}}</p>
+            <p>Студия: {{context['FilmStudio']}}</p>
+            <p>Длительность: {{context['Duration']}} мин.</p>
+        </div>
+        <div>
+            {% if context['seans_info'] == -1 %}
+                <h3>Сеансов нет</h3>
+            {% else %}
+                <h3>Сеансы</h3>
+                {% for seans in context['seans_info'] %}
+                    <a>
+                        <div style="text-align:left; border-style:solid; border-color:black; margin:5px">
+                            <p>Дата и время: {{seans['Date']}} {{seans['Time']}}</p>
+                            <p>Зал: {{seans['zal_Name']}}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Кинотеатр "Звезда"</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
+    <div>
+        {% if not context %}
+            <h2>Ошибка получения данных</h2>
+        {% elif context == -1 %}
+            <h2>Данные отсутствуют</h2>
+        {% else %}
+            <h2>Сейчас в прокате</h2>
+            <div class="list">
+            {% for film in context %}
+                <div>
+                    <a href="./film/{{film['ID']}}">
+                        <h3>{{film['Title']}}</h3>
+                        <img class="poster" src="{{film['PosterURL']}}" alt="Постер фильма '{{film['Title']}}'" width="80%">
+                        <p>Длительность: {{film['Duration']}} мин.</p><br><br>
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

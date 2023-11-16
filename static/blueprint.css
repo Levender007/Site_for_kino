@@ -1,0 +1,54 @@
+div {text-align : center}
+
+h2 {font-size : 20pt;
+    font-weight : bold}
+
+h3 {font-size : 16pt;
+    font-weight : bold}
+
+a  {font-size : 14pt;
+    font-weight : bold;
+    color : black}
+
+table {margin-left: auto;
+       margin-right: auto}
+
+ul {text-align : left;
+    display : inline-block}
+
+.button {background    : blue;
+         color         : white;
+         border-radius : 6px;
+         width         : auto;
+         height        : auto;
+         font-weight   : normal;
+         text-decoration: none}
+
+.list {display: grid;
+       grid-template-columns: repeat(3, 1fr);}
+
+.list div{text-align: center;
+          border: 1px solid black;}
+
+.img_desc {display: grid;
+           grid-template-columns: 1fr 1fr 2fr;}
+
+.checkbox-label {font-size : 12pt;
+                 font-weight : bold;}
+
+.text-label {font-size : 12pt;
+             font-weight : bold;
+             display : inline-block;
+             width : 200px;
+             text-align : right}
+
+.tab_title {font-weight : bold;
+            text-align : center}
+
+.menu-button {position : fixed;
+              top : 0;
+              left : 0}
+
+.back {position : fixed;
+       top : 0;
+       right : 0}
