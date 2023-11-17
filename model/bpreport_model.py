@@ -42,8 +42,8 @@ def use_proc(db_config, proc, method, form):
         html = f"input_{res}.html"
     else:
         html = 'proc_res.html'
-        res = call_proc(db_config, f'supermarket.{proc}', (form['date'], 0), (1,))
-        if res is None or res == -1:
+        res = call_proc(db_config, f'kino.{proc}', (form['date'], 0), (1,))
+        if res is None:
             html = 'db_error.html'
         else:
             ret.append(res[0])
