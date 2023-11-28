@@ -21,14 +21,16 @@ def select_distinct(config: dict, sql: str):
     with DBConnect(config) as cur:
         cur.execute(sql)
         res = cur.fetchall()
-        if res is not None:
+        if res is None:
+            return None
+        elif len(res) == 0:
+            return -1
+        else:
             res_tuple = []
             for buf in res:
                 res_tuple.append(buf[0])
             res_tuple = tuple(res_tuple)
             return res_tuple
-        else:
-            return None
 
 
 def call_proc(config: dict, proc: str, args=(), argpos=()):
