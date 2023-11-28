@@ -31,5 +31,23 @@ def select_distinct(config: dict, sql: str):
             return None
 
 
+def call_proc(config: dict, proc: str, args=(), argpos=()):
+    if len(argpos) > 0 and max(argpos) >= len(args):
+        return None
+    res = []
+    with DBConnect(config) as cur:
+        cur.callproc(proc, args)
+        for i in argpos:
+            cur.execute(f'select @_{proc}_{i}')
+            one = cur.fetchone()
+            if one is None or len(one) == 0:
+                return None
+            res.append(one[0])
+    if len(res) == 0:
+        return 0
+    else:
+        return res
+
+
 if __name__ == '__main__':
     print('Debug mode')
