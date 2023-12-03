@@ -27,7 +27,7 @@
             {% else %}
                 <h3>Сеансы</h3>
                 {% for seans in context['seans_info'] %}
-                    <a>
+                    <a href="{{url_for('bp_order.order_index', seansID=seans['ID'])}}">
                         <div style="text-align:left; border-style:solid; border-color:black; margin:5px">
                             <p>Дата и время: {{seans['Date']}} {{seans['Time']}}</p>
                             <p>Зал: {{seans['zal_Name']}}</p>
