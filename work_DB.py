@@ -17,6 +17,22 @@ def select(config: dict, _sql: str):
             return res_dict
 
 
+def select_tab(config: dict, _sql: str):
+    with DBConnect(config) as cur:
+        cur.execute(_sql)
+        res = cur.fetchall()
+        if res is None:
+            return None
+        elif len(res) == 0:
+            return -1
+        else:
+            schema = [item[0] for item in cur.description]
+            res_dict = [schema, ]
+            for product in res:
+                res_dict.append(product)
+            return res_dict
+
+
 def select_distinct(config: dict, sql: str):
     with DBConnect(config) as cur:
         cur.execute(sql)

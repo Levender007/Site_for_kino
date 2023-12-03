@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Работа с отчётом</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div>
+        {% if context[1] == 0 %}
+            <h2>{{context[0]}} на {{date}} создан</h2>
+        {% else %}
+            <h2>{{context[0]}} на {{date}} уже существует</h2>
+        {% endif %}
+    </div>
+    <div class="bott">
+        <p><a href="{{url_for('main_menu')}}">Вернуться в главное меню</a> &nbsp <a href="{{url_for('.report_menu')}}">Вернуться к выбору отчёта</a></p>
+    </div>
+</body>
+</html>

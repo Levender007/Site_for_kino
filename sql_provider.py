@@ -6,7 +6,7 @@ class SQLProvider:
     def __init__(self, file_path: str):
         self._scripts = {}
         for file in os.listdir(file_path):
-            sql = open(f'{file_path}/{file}').read()
+            sql = open(f'{file_path}/{file}', encoding='utf-8').read()
             self._scripts[file] = Template(sql)
 
     def get(self, name, **kwargs):

@@ -17,6 +17,9 @@
         {% if 'menu' in access %}
             <a href="{{url_for('bp_query.menu')}}">Работа с запросами</a><br>
         {% endif %}
+        {% if 'report_menu' in access %}
+            <a href="{{url_for('bp_report.report_menu')}}">Работа с отчётами</a>
+        {% endif %}
         {% if ui %}
             <br><a href="{{url_for('bp_auth.logoff')}}">Выход</a>
         {% endif %}

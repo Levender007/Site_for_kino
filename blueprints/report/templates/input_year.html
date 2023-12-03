@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Введите параметры</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div>
+    <h2>Введите год</h2>
+    <form action="" method=post>
+        <label for="cat" class="text-label">Год</label>
+        <input type="number" min="1950" max="2100" name="date" id="cat"><br><br>
+        <input type="submit" value="Отправить" class="button"><input type="reset" value="Очистить" class="button">
+    </form>
+</div>
+<div class="bott">
+    <p><a href="{{url_for('main_menu')}}">Вернуться в главное меню</a> &nbsp <a href="{{url_for('.report_menu')}}">Вернуться к выбору отчёта</a></p>
+</div>
+</body>
+</html>
