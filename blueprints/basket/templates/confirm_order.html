@@ -6,14 +6,14 @@
     <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
     <div>
         {% if result == 0 %}
             <h2>Заказ оформлен</h2>
         {% else %}
             <h2>Ошибка при оформлении заказа</h2>
         {% endif %}
-        <a href="{{url_for('main_menu')}}">Вернуться в меню</a>
-        <a href="{{url_for('.order_index')}}">Новый заказ</a>
+        <a href="{{url_for('home_page')}}">Новый заказ</a>
     </div>
 </body>
 </html>

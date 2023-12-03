@@ -1,1 +1,2 @@
-insert order_details(order_id, prod_id, Price, amount) values (@$us$user_id, $id, $price, $amount);
+insert order_details(order_id, prod_id, Price) values (@$us$user_id, $id, $price);
+update tickets set Sold = True where ID = $id;

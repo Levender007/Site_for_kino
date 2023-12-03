@@ -9,42 +9,45 @@ blueprint_order = Blueprint('bp_order', __name__, template_folder='templates')
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 
-@blueprint_order.route('/', methods=['GET', 'POST'])
+@blueprint_order.route('/<seansID>', methods=['GET', 'POST'])
 @login_required
 @group_validation
-def order_index():
+def order_index(seansID):
     if request.method == 'GET':
-        sql = provider.get('basket.sql')
-        items = select(current_app.config['db_config'], sql)
-        if items == -1 or items is None:
-            return render_template('db_error.html')
         basket = session.get('basket', {})
-        return render_template('order_list.html', items=items, basket=basket)
+        if len(basket.keys()) == 0:
+            bas = (-1, -2)
+        elif len(basket.keys()) == 1:
+            bas = list(basket.keys())
+            bas = (bas[0], -1)
+        else:
+            bas = tuple(basket.keys())
+        sql = provider.get('basket.sql', bas=bas, id=seansID)
+        items = select(current_app.config['db_config'], sql)
+        sql = provider.get('seans_info.sql', id=seansID)
+        seans = select(current_app.config['db_config'], sql)
+        if items == -1 or items is None or seans == -1 or seans is None:
+            return render_template('db_error.html')
+        return render_template('order_list.html', items=items, basket=basket, seans=seans[0])
     else:
         if 'Clear' in request.form:
             session.pop('basket', None)
         elif 'Decrease' in request.form:
-            prod_id = request.form['ID']
-            if session['basket'][prod_id]['amount'] == 1:
-                session['basket'].pop(prod_id)
-            else:
-                session['basket'][prod_id]['amount'] -= 1
+            session['basket'].pop(request.form['ID'])
         else:
             if 'basket' not in session:
                 session['basket'] = dict()
             prod_id = request.form['ID']
-            if prod_id in session['basket']:
-                session['basket'][prod_id]['amount'] += 1
-            else:
+            if prod_id not in session['basket']:
                 sql = provider.get('added.sql', prod_id=prod_id)
                 item = select(current_app.config['db_config'], sql)
                 if item == -1 or item is None:
                     return render_template('db_error.html')
                 else:
                     item = item[0]
-                session['basket'][prod_id] = {'amount': 1, 'Name': item['Name'], 'Price': item['Price']}
+                session['basket'][prod_id] = {'RowOfSeat': item['RowOfSeat'], 'Seat': item['Seat'], 'Price': item['Price']}
         session.permanent = True
-        return redirect(url_for('.order_index'))
+        return redirect(url_for('.order_index', seansID=seansID))
 
 
 @blueprint_order.route('/confirm_order')
@@ -60,8 +63,8 @@ def conf_order():
     revenu = 0
     dsql = ''
     for key in basket:
-        revenu += basket[key]['amount']*basket[key]['Price']
-        dsql += provider.get('insert_det.sql', id=key, price=basket[key]['Price'], amount=basket[key]['amount'], user_id=session['user_id'], us=us)
+        revenu += basket[key]['Price']
+        dsql += provider.get('insert_det.sql', id=key, price=basket[key]['Price'], user_id=session['user_id'], us=us)
     session.pop('basket')
     sql = provider.get(f'insert_order_{us}.sql', id=session['user_id'], sum=revenu, us=us)
     sql += dsql

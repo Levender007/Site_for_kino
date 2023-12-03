@@ -7,17 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
+    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
+    <a href="{{url_for('film_info', name=ID)}}"><img class="back" src="https://cdn-icons-png.flaticon.com/512/5908/5908333.png" width="3%" alt="B"></a>
     <div>
+        <h3>{{seans['Title']}}</h3>
+        <h3>Зал {{seans['Name']}} {{seans['Date']}} {{seans['Time']}}</h3>
         {% if basket %}
             <a href="{{url_for('.conf_order')}}" class="button">Оформить заказ</a>
         {% endif %}
-        <a href="{{url_for('main_menu')}}">Вернуться в меню</a>
     </div>
     {% import 'busket_utils.html' as utils %}
     <div class = container>
         <div class="row">
             <div class="col-md-8">
-                <h2>Каталог</h2>
+                <h2>Билеты</h2>
                 {% for item in items %}
                     {{utils.render_item(item, show_form=True)}}
                 {% endfor %}
