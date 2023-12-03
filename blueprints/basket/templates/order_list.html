@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+    <div>
+        {% if basket %}
+            <a href="{{url_for('.conf_order')}}" class="button">Оформить заказ</a>
+        {% endif %}
+        <a href="{{url_for('main_menu')}}">Вернуться в меню</a>
+    </div>
+    {% import 'busket_utils.html' as utils %}
+    <div class = container>
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Каталог</h2>
+                {% for item in items %}
+                    {{utils.render_item(item, show_form=True)}}
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                <h2>Корзина</h2>
+                {% if basket %}
+                    {% for key in basket %}
+                        {{utils.render_item(basket[key], show_amount=True, id=key)}}
+                    {% endfor %}
+                    <form method="post" action="">
+                        <input class="button" type="submit" name="Clear" value="Очистить корзину">
+                    </form>
+                {% else %}
+                    <h3>Корзина пуста</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

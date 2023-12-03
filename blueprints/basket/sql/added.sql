@@ -1,0 +1,1 @@
+select Name, Price from product where ID = $prod_id
