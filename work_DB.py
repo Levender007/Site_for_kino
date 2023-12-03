@@ -67,5 +67,13 @@ def call_proc(config: dict, proc: str, args=(), argpos=()):
         return res
 
 
+def insert(config: dict, sql: str):
+    res = 1
+    with DBConnect(config) as cur:
+        cur.execute(sql)
+        res = 0
+    return res
+
+
 if __name__ == '__main__':
     print('Debug mode')
