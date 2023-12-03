@@ -58,10 +58,10 @@ def auth_protocol(method, db_config, form):
                 else:
                     ret = 2
                 return html, data, ret
-            pr[0]['user_group'] = None
+            pr[0]['user_group'] = "None"
         html = 'auth_results.html'
         ug = pr[0]['user_group']
-        if ug is None:
+        if ug is "None":
             ug = 'user'
         current_app.config['db_config'] = current_app.config[f'{ug}_db_config.json']
         current_app.config['SECRET_KEY'] = os.urandom(20).hex()
