@@ -3,9 +3,9 @@ import json
 from random import randint, random
 
 
-today = 20231106
-to_day = 20231201
-startday = 20230901
+today = 20231203
+to_day = 20240101
+startday = 20231001
 
 
 class Time:
@@ -56,6 +56,8 @@ with DBConnect(db_config) as cur:
             if t+film[1] >= 2000:
                 if day % 100 == 30:
                     day = day//100*100 + 101
+                    if day % 10000 == 1301:
+                        day = day//10000*10000 + 10101
                 else:
                     day += 1
                 d = f'{day // 10000:04}-{(day // 100) % 100:02}-{day % 100:02}'
@@ -70,6 +72,8 @@ with DBConnect(db_config) as cur:
             if t + film[1] >= 2000:
                 if day % 100 == 30:
                     day = day // 100 * 100 + 101
+                    if day % 10000 == 1301:
+                        day = day//10000*10000 + 10101
                 else:
                     day += 1
                 d = f'{day // 10000:04}-{(day // 100) % 100:02}-{day % 100:02}'
