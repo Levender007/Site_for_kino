@@ -2,6 +2,7 @@ from flask import render_template, Flask, session
 from blueprints.query.blueprint import blueprint_query
 from blueprints.auth.auth import blueprint_auth
 from blueprints.report.route import blueprint_report
+from blueprints.basket.route import blueprint_order
 import model.app_model as model
 import os
 import json
@@ -19,6 +20,7 @@ app.config['auth_db_config'] = app.config['db_config']
 app.register_blueprint(blueprint_query, url_prefix='/query')
 app.register_blueprint(blueprint_auth, url_prefix='/auth')
 app.register_blueprint(blueprint_report, url_prefix='/report')
+app.register_blueprint(blueprint_order, url_prefix='/order')
 
 
 @app.route('/')
