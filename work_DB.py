@@ -67,10 +67,11 @@ def call_proc(config: dict, proc: str, args=(), argpos=()):
         return res
 
 
-def insert(config: dict, sql: str):
+def multi_execute(config: dict, sqls: list | tuple):
     res = 1
     with DBConnect(config) as cur:
-        cur.execute(sql)
+        for sql in sqls:
+            cur.execute(sql)
         res = 0
     return res
 

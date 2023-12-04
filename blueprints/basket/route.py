@@ -61,12 +61,15 @@ def conf_order(seansID):
     else:
         us = 'in'
     revenu = 0
-    dsql = ''
+    sql = ['', '']
     for key in basket:
         revenu += basket[key]['Price']
-        dsql += provider.get('insert_det.sql', id=key, price=basket[key]['Price'], user_id=session['user_id'], us=us)
+        buf = provider.get('insert_det.sql', id=key, price=basket[key]['Price'], user_id=session['user_id'], us=us).split(';')
+        sql.append(buf[0])
+        sql.append(buf[1])
     session.pop(f'basket{seansID}')
-    sql = provider.get(f'insert_order_{us}.sql', id=session['user_id'], sum=revenu, us=us)
-    sql += dsql
-    ret = insert(current_app.config['db_config'], sql)
+    buf = provider.get(f'insert_order_{us}.sql', id=session['user_id'], sum=revenu, us=us).split(';')
+    sql[0] = buf[0]
+    sql[1] = buf[1]
+    ret = multi_execute(current_app.config['db_config'], sql)
     return render_template('confirm_order.html', result=ret)
