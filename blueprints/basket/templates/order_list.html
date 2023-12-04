@@ -13,7 +13,7 @@
         <h3>{{seans['Title']}}</h3>
         <h3>Зал {{seans['Name']}} {{seans['Date']}} {{seans['Time']}}</h3>
         {% if basket %}
-            <a href="{{url_for('.conf_order')}}" class="button">Оформить заказ</a>
+            <a href="{{url_for('.conf_order', seansID=seans['seansID'])}}" class="button">Оформить заказ</a>
         {% endif %}
     </div>
     {% import 'busket_utils.html' as utils %}

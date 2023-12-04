@@ -14,7 +14,7 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 @group_validation
 def order_index(seansID):
     if request.method == 'GET':
-        basket = session.get('basket', {})
+        basket = session.get(f'basket{seansID}', {})
         if len(basket.keys()) == 0:
             bas = (-1, -2)
         elif len(basket.keys()) == 1:
@@ -31,31 +31,31 @@ def order_index(seansID):
         return render_template('order_list.html', items=items, basket=basket, seans=seans[0])
     else:
         if 'Clear' in request.form:
-            session.pop('basket', None)
+            session.pop(f'basket{seansID}', None)
         elif 'Decrease' in request.form:
-            session['basket'].pop(request.form['ID'])
+            session[f'basket{seansID}'].pop(request.form['ID'])
         else:
-            if 'basket' not in session:
-                session['basket'] = dict()
+            if f'basket{seansID}' not in session:
+                session[f'basket{seansID}'] = dict()
             prod_id = request.form['ID']
-            if prod_id not in session['basket']:
+            if prod_id not in session[f'basket{seansID}']:
                 sql = provider.get('added.sql', prod_id=prod_id)
                 item = select(current_app.config['db_config'], sql)
                 if item == -1 or item is None:
                     return render_template('db_error.html')
                 else:
                     item = item[0]
-                session['basket'][prod_id] = {'RowOfSeat': item['RowOfSeat'], 'Seat': item['Seat'], 'Price': item['Price']}
+                session[f'basket{seansID}'][prod_id] = {'RowOfSeat': item['RowOfSeat'], 'Seat': item['Seat'], 'Price': item['Price']}
         session.permanent = True
         return redirect(url_for('.order_index', seansID=seansID))
 
 
-@blueprint_order.route('/confirm_order')
+@blueprint_order.route('/confirm_order/<seansID>')
 @login_required
-def conf_order():
-    basket = session.get('basket', None)
+def conf_order(seansID):
+    basket = session.get(f'basket{seansID}', None)
     if basket is None:
-        return redirect(url_for('.order_index'))
+        return redirect(url_for('.order_index', seansID=seansID))
     if session['user_group'] == 'None':
         us = 'out'
     else:
@@ -65,7 +65,7 @@ def conf_order():
     for key in basket:
         revenu += basket[key]['Price']
         dsql += provider.get('insert_det.sql', id=key, price=basket[key]['Price'], user_id=session['user_id'], us=us)
-    session.pop('basket')
+    session.pop(f'basket{seansID}')
     sql = provider.get(f'insert_order_{us}.sql', id=session['user_id'], sum=revenu, us=us)
     sql += dsql
     ret = insert(current_app.config['db_config'], sql)
