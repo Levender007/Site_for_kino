@@ -8,7 +8,7 @@
 </head>
 <body>
     <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
-    <a href="{{url_for('film_info', name=ID)}}"><img class="back" src="https://cdn-icons-png.flaticon.com/512/5908/5908333.png" width="3%" alt="B"></a>
+    <a href="{{url_for('film_info', name=seans['ID'])}}"><img class="back" src="https://cdn-icons-png.flaticon.com/512/5908/5908333.png" width="3%" alt="B"></a>
     <div>
         <h3>{{seans['Title']}}</h3>
         <h3>Зал {{seans['Name']}} {{seans['Date']}} {{seans['Time']}}</h3>
