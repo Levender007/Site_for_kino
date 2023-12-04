@@ -26,7 +26,7 @@ def order_index(seansID):
         items = select(current_app.config['db_config'], sql)
         sql = provider.get('seans_info.sql', id=seansID)
         seans = select(current_app.config['db_config'], sql)
-        if items == -1 or items is None or seans == -1 or seans is None:
+        if items is None or seans == -1 or seans is None:
             return render_template('db_error.html')
         return render_template('order_list.html', items=items, basket=basket, seans=seans[0])
     else:
