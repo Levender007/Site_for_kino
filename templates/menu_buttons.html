@@ -1,0 +1,6 @@
+{% macro render_buttons(back_url=None) %}
+<a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
+{% if back_url %}
+<a href="{{back_url}}"><img class="back" src="https://cdn-icons-png.flaticon.com/512/5908/5908333.png" width="3%" alt="B"></a>
+{% endif %}
+{% endmacro %}

@@ -6,6 +6,8 @@
     <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
+{% import 'menu_buttons.html' as but %}
+{{but.render_buttons()}}
 <div>
     <h2>Введите логин и пароль</h2>
     <form action="" method=post>
@@ -23,11 +25,10 @@
             <p style="color: red">Такого пользователя не существует</p>
         {% elif context == 2 %}
             <p style="color: red">Неверный пароль</p>
+        {% elif context == 3 %}
+            <p style="color: red">Все поля должны быть заполнены</p>
         {% endif %}
     </div>
 {% endif %}
-<div class="bott">
-    <a href="{{url_for('main_menu')}}">Вернуться в главное меню</a>
-</div>
 </body>
 </html>

@@ -25,13 +25,13 @@ app.register_blueprint(blueprint_order, url_prefix='/order')
 
 @app.route('/')
 def home_page():
-    ct = model.home(app.config['db_config'])
+    ct = model.home(app.config['undefined_db_config.json'])
     return render_template('home_page.html', context=ct)
 
 
 @app.route('/film/<name>')
 def film_info(name):
-    html, ct = model.film(app.config['db_config'], name)
+    html, ct = model.film(app.config['undefined_db_config.json'], name)
     return render_template(html, context=ct)
 
 

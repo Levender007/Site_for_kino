@@ -32,9 +32,9 @@ def operating_mode(db_config, proc):
 def use_proc(db_config, proc, method, form):
     sql = provider.get('proc_desc.sql', proc=proc)
     res = select(db_config, sql)
-    if res is None or res == -1:
+    if res is None or res == -1 or res[0]['href_name'] == '':
         html = 'db_error.html'
-        return html, []
+        return html, None
     else:
         ret = [res[0]['href_name'].split('; ')[0], ]
     if method == 'GET':
@@ -45,6 +45,7 @@ def use_proc(db_config, proc, method, form):
         res = call_proc(db_config, f'kino.{proc}', (form['date'], 0), (1,))
         if res is None:
             html = 'db_error.html'
+            ret = None
         else:
             ret.append(res[0])
     return html, ret
@@ -53,9 +54,9 @@ def use_proc(db_config, proc, method, form):
 def select_report(db_config, proc, method, form):
     sql = provider.get('proc_desc.sql', proc=proc)
     res = select(db_config, sql)
-    if res is None or res == -1:
+    if res is None or res == -1 or res[0]['href_name'] == '':
         html = 'db_error.html'
-        return html, []
+        return html, None
     else:
         ret = [res[0]['href_name'].split('; ')[0], ]
     if method == 'GET':
@@ -67,4 +68,5 @@ def select_report(db_config, proc, method, form):
         ret.append(select_tab(db_config, sql))
         if ret[1] is None:
             html = 'db_error.html'
+            ret = None
     return html, ret

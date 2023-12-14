@@ -1,11 +1,9 @@
 import pymysql.cursors
-from pymysql.constants import CLIENT
 
 
 class DBConnect:
     def __init__(self, config: dict):
         self.config = config
-        self.config["client_flag"] = CLIENT.MULTI_STATEMENTS
         self.DB = None
         self.cursor = None
 

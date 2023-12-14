@@ -22,8 +22,7 @@ def group_validation(func):
             if user_group in config and endpoint_app in config[user_group]:
                 return func(*args, **kwargs)
             else:
-                return render_template('forbiden.html')
+                return render_template('forbidden.html')
         return func(*args, **kwargs)
 
     return wrapper
-

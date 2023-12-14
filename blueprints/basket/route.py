@@ -27,7 +27,7 @@ def order_index(seansID):
         sql = provider.get('seans_info.sql', id=seansID)
         seans = select(current_app.config['db_config'], sql)
         if items is None or seans == -1 or seans is None:
-            return render_template('db_error.html')
+            return render_template('db_error.html', context=None)
         return render_template('order_list.html', items=items, basket=basket, seans=seans[0])
     else:
         if 'Clear' in request.form:
@@ -42,7 +42,7 @@ def order_index(seansID):
                 sql = provider.get('added.sql', prod_id=prod_id)
                 item = select(current_app.config['db_config'], sql)
                 if item == -1 or item is None:
-                    return render_template('db_error.html')
+                    return render_template('db_error.html', context=None)
                 else:
                     item = item[0]
                 session[f'basket{seansID}'][prod_id] = {'RowOfSeat': item['RowOfSeat'], 'Seat': item['Seat'], 'Price': item['Price']}
@@ -52,6 +52,7 @@ def order_index(seansID):
 
 @blueprint_order.route('/confirm_order/<seansID>')
 @login_required
+@group_validation
 def conf_order(seansID):
     basket = session.get(f'basket{seansID}', None)
     if basket is None:

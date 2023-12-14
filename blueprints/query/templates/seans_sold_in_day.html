@@ -6,8 +6,8 @@
     <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
-    <a href="{{url_for('.menu')}}"><img class="back" src="https://cdn-icons-png.flaticon.com/512/5908/5908333.png" width="3%" alt="B"></a>
+    {% import 'menu_buttons.html' as but %}
+    {{but.render_buttons(url_for('.menu'))}}
     <div>
         {% if not context['result'] %}
             <h2>Ошибка получения данных</h2>

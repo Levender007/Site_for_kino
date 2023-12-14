@@ -6,13 +6,11 @@
     <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
+    {% import 'menu_buttons.html' as but %}
+    {{but.render_buttons()}}
     <div>
         <h2>Выберите запрос</h2>
-        <a href="{{url_for('.query', func='big_zal')}}">Информация по самому крупному залу</a><br>
-        <a href="{{url_for('.query', func='max_seats')}}">Максимальное число меcт в зале</a><br>
         <a href="{{url_for('.query', func='month_by_day_revenu')}}">Информация по доходам за месяц</a><br>
-        <a href="{{url_for('.query', func='non_seans_zal')}}">Информация по залам, в которых не проходили сеансы</a><br>
         <a href="{{url_for('.query', func='seans_count_in_zal')}}">Отчёт о количестве сеансов за месяц</a><br>
         <a href="{{url_for('.query', func='seans_for_days')}}">Информация о сеансах за последние N дней</a><br>
         <a href="{{url_for('.query', func='seans_info_in_month')}}">Информация о сеансах за месяц</a><br>

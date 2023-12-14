@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Выход выполнен</title>
+    <title>Доступ запрещён</title>
     <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
+    {% import 'menu_buttons.html' as but %}
+    {{but.render_buttons()}}
     <div>
-        <h2>Выход выполнен</h2><br>
-        <a href="{{url_for('main_menu')}}">Вернуться в главное меню</a>
+        <h2>Доступ запрещён</h2><br>
     </div>
 </body>
 </html>

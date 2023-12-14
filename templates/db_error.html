@@ -6,9 +6,14 @@
     <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
+    {% import 'menu_buttons.html' as but %}
+    {{but.render_buttons()}}
     <div>
-        <h2>Ошибка получения данных</h2>
-        <a href="{{url_for('main_menu')}}">Вернуться в главное меню</a>
+        {% if context %}
+            <h2>Данные отсутствуют</h2>
+        {% else %}
+            <h2>Ошибка получения данных</h2>
+        {% endif %}
     </div>
 </body>
 </html>

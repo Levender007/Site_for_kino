@@ -14,18 +14,16 @@ def home(db_conf):
 
 def film(db_config, n):
     sql = provider.get('film_info.sql', title=n)
-    pr = select(db_config, sql)
-    ret = pr
-    if pr is None or pr == -1:
-        html = 'non_film_res.html'
+    ret = select(db_config, sql)
+    if ret is None or ret == -1:
+        html = 'db_error.html'
         return html, ret
     ret = ret[0]
     sql = provider.get('seans_info.sql', title=n)
-    pr = select(db_config, sql)
-    ret['seans_info'] = pr
-    if pr is None:
-        html = 'non_film_res.html'
-        return html, ret
+    ret['seans_info'] = select(db_config, sql)
+    if ret['seans_info'] is None:
+        html = 'db_error.html'
+        return html, None
     else:
         html = 'film_info.html'
         return html, ret

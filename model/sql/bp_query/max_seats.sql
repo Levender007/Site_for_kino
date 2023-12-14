@@ -1,1 +1,0 @@
-select max(SeatsCount) as max from zal;

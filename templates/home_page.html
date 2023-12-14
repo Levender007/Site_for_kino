@@ -6,12 +6,13 @@
     <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <a href="{{url_for('main_menu')}}"><img class="menu-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" width="3%" alt="MM"></a>
+    {% import 'menu_buttons.html' as but %}
+    {{but.render_buttons()}}
     <div>
         {% if not context %}
             <h2>Ошибка получения данных</h2>
         {% elif context == -1 %}
-            <h2>Данные отсутствуют</h2>
+            <h2>Сейчас нет фильмов в прокате</h2>
         {% else %}
             <h2>Сейчас в прокате</h2>
             <div class="list">

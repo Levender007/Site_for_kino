@@ -6,15 +6,16 @@
     <link href="{{url_for('static', filename='blueprint.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
+    {% import 'menu_buttons.html' as but %}
+    {{but.render_buttons(url_for('.report_menu'))}}
     <div>
         {% if context[1] == 0 %}
             <h2>{{context[0]}} на {{date}} создан</h2>
-        {% else %}
+        {% elif context[1] == -1 %}
             <h2>{{context[0]}} на {{date}} уже существует</h2>
+        {% else %}
+            <h2>Для {{context[0]}} на {{date}} нет данных</h2>
         {% endif %}
-    </div>
-    <div class="bott">
-        <p><a href="{{url_for('main_menu')}}">Вернуться в главное меню</a> &nbsp <a href="{{url_for('.report_menu')}}">Вернуться к выбору отчёта</a></p>
     </div>
 </body>
 </html>
